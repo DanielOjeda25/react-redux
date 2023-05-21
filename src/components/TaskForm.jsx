@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addTask } from "../features/tasks/taskSlice";
+import { addTask, editTask } from "../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -22,17 +22,16 @@ const TaskForm = () => {
   }
   const handleSubmit = e => {
     e.preventDefault();
-    
-    if(params.id){
-dispatch()
-    }else {
+
+    if (params.id) {
+      dispatch(editTask({ ...task, id: params.id }))
+    } else {
       dispatch(addTask({
         ...task,
         id: uuid()
       }));
-      navigate('/')
     }
-    
+    navigate('/')
   }
 
   useEffect(() => {
